@@ -1,0 +1,26 @@
+on:
+  push:
+    paths: 
+      - 'hw.tex'
+
+jobs:
+  deploy:
+    runs-on: ubuntu-18.04
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - name: Compile TeX
+        uses: xu-cheng/latex-action@v2
+        with:
+          root_file: hw.tex
+
+      - uses: actions/upload-artifact@v2
+        with:
+          name: Homework
+          path: ./hw.pdf
+
+      - name: Release
+        uses: softprops/action-gh-release@v1
+        with:
+          files: ./hw.pdf
