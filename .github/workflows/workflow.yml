@@ -20,10 +20,8 @@ jobs:
           name: Homework
           path: ./hw.pdf
 
-      - name: update file and push to remote
+      - name: Push to remote
         run: |
-          echo "Test push commit to the remote in the workflow" >> test.txt
-
           git config user.name github-actions
           git config user.email github-actions@github.com
 
