@@ -20,7 +20,13 @@ jobs:
           name: Homework
           path: ./hw.pdf
 
-      - name: Release
-        uses: softprops/action-gh-release@v1
-        with:
-          files: ./hw.pdf
+      - name: update file and push to remote
+        run: |
+          echo "Test push commit to the remote in the workflow" >> test.txt
+
+          git config user.name github-actions
+          git config user.email github-actions@github.com
+
+          git add hw.pdf
+          git commit -m "Upload pdf"
+          git push
