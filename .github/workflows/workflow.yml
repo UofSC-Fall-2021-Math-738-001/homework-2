@@ -20,7 +20,11 @@ jobs:
           name: Homework
           path: ./hw.pdf
 
-      - name: Release
-        uses: softprops/action-gh-release@v1
-        with:
-          files: ./hw.pdf
+      - name: Push to remote
+        run: |
+          git config user.name github-actions
+          git config user.email github-actions@github.com
+
+          git add hw.pdf
+          git commit -m "Upload pdf"
+          git push
