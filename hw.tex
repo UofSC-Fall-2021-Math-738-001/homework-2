@@ -2,6 +2,7 @@
 \usepackage{amsmath}
 \usepackage{amsfonts}
 \usepackage{tikz}
+\usepackage{tikz-cd}
 
 \addtolength{\oddsidemargin}{-0.5in}
 \addtolength{\evensidemargin}{-0.5in}
@@ -12,55 +13,64 @@
 \begin{document}
 
 \centerline{\bf MATH 738}
-\centerline{\bf HW 1} 
-\centerline{\bf Due 9/15}
+\centerline{\bf HW 2} 
+\centerline{\bf Due 11/29}
 
 \vspace{2em}
 
-% -Isomorphisms induce natural isomorphism of h_X
-% -Check that F^{-1} on morphism is also a functor. 
-% -Units/counits <=> adjunction
-% -Complete the proof of Tensor-Hom adjunction, check natural transformation 
-% -Inverse of natural isomorphism is an natural transformation
-
 \begin{enumerate}
     
-    \item Let $\phi : X \to X^\prime$ be an isomorphism in a category $\mathcal C$. Show that 
+    \item Let $\mathcal C$ be an additive category. An ideal of $\mathcal C$ is a collection of 
+    subspaces 
+    \begin{displaymath}
+        I(X,Y) \subseteq \operatorname{Hom}(X,Y)
+    \end{displaymath} 
+    for each pair of objects $X,Y$ such that for any $f: X \to X^\prime$ and $g: Y \to Y^\prime$ 
+    we have 
+    \begin{displaymath}
+        g \circ I(X,Y) \circ f \subseteq I(X^\prime,Y^\prime).
+    \end{displaymath}
+
+    Show that $\overline{\mathcal C}$ with the same objects as $\mathcal C$ and with 
+    \begin{displaymath}
+        \operatorname{Hom}_{\overline{\mathcal C}}(X,Y) := \operatorname{Hom}_{\mathcal C}(X,Y)/I(X,Y)
+    \end{displaymath}
+    has the structure of an additive category such that 
     \begin{align*}
-        \operatorname{Hom}(X^\prime,Y) & \to \operatorname{Hom}(X,Y) \\
-        \psi & \mapsto \psi \circ \phi
+        X & \mapsto X \\
+        f & \mapsto \overline{f}
     \end{align*}
-    is a bijection. Show that it induces an isomorphism $h_X \cong h_{X^\prime}$. 
+    is a essentially surjective and full additive functor. 
 
-    \item In the proof that a fully-faithful and essential surjective functor is an equivalence, we 
-    constructed what we claimed was the inverse. Show that it is well-defined and indeed the inverse functor. 
+    \item Let $P,Q$ be a bounded above complexes of projectives. Directly show that any quasi-isomorphism 
+    \begin{displaymath}
+        Q \to P 
+    \end{displaymath}
+    has an inverse up to homotopy. 
 
-    \item Prove that $F \vdash G$ if and only if there exists $\eta : \operatorname{Id} \to GF$ and $\eta 
-    : FG \to \operatorname{Id}$ satsifying 
-    \begin{center}
-    \begin{tikzpicture}
-        \node at (0,0) (F1) {$F$};
-        \node at (2,0) (FGF) {$FGF$};
-        \node at (4,0) (F2) {$F$};
-        \draw[->] (F1) -- node[below] {$F(\eta)$} (FGF);
-        \draw[->] (FGF) -- node[below] {$\epsilon_F$} (F2);
-        \draw[->] (F1) to [out=30,in=150] node[above] {$1$} (F2); 
-    \end{tikzpicture}
-    \end{center}
-    and 
-    \begin{center}
-    \begin{tikzpicture}
-        \node at (0,0) (G1) {$G$};
-        \node at (2,0) (GFG) {$GFG$};
-        \node at (4,0) (G2) {$G$};
-        \draw[->] (G1) -- node[below] {$\eta_G$} (GFG);
-        \draw[->] (GFG) -- node[below] {$G(\epsilon)$} (G2);
-        \draw[->] (G1) to [out=30,in=150] node[above] {$1$} (G2);
-    \end{tikzpicture}
-    \end{center}
+    \item Assume we have a commutative diagram 
+    \begin{equation*}
+        \begin{tikzcd}
+            \cdots \ar[r] & A^i \ar[r] \ar[d,"f^i"] & B^i \ar[r] \ar[d,"g^i"] & C^i \ar[r] \ar[d,"h^i"] & A^{i+1} \ar[r] \ar[d,"f^{i+1}"] & \cdots \\
+            \cdots \ar[r] & D^i \ar[r] & E^i \ar[r] & F^i \ar[r] & D^{i+1} \ar[r] & \cdots
+        \end{tikzcd}
+    \end{equation*}
+    in an abelian category $\mathcal A$ with exact rows. Show that if any two of $f^\bullet, g^\bullet, h^\bullet$ are all isomorphisms, then so is the third. 
+    
+    \item Let $\mathcal T$ a compactly generated triangulated category and let $\mathcal P(X)$ be a predicate depending on objects of $\mathcal T$. Assume that
+    \begin{itemize}
+        \item if $X$ and $Y$ are isomorphic and $\mathcal P(X)$ is true, then $\mathcal P(Y)$ is true for $Y$
+        \item $\mathcal P$ is true for a set of compact generators, 
+        \item if $X \to Y \to Z \to X[1]$ is a triangle and $\mathcal P$ is true for two of the three $X,Y$, and $Z$, then $\mathcal P$ is true for the third. 
+        \item if $\mathcal P$ is true for $X_a$ for $a \in A$, then $\mathcal P$ is true for $\bigoplus_a X_a$. 
+    \end{itemize}
+    Show that $\mathcal P$ is true for all objects of $\mathcal T$. 
 
-    \item Complete the proof of tensor-hom adjunction. Show that the claimed inverse natural transformation is 
-    well-defined and indeed the inverse. 
+    \item An {\em cohomological functor} $H: \mathcal T^{op} \to \operatorname{Ab}$ is a functor that takes triangles to long exact sequences and for which the natural map 
+    \begin{displaymath}
+        H\left( \bigoplus_{a \in A} X_a \right) \to \prod_{a \in A} H(X_a)
+    \end{displaymath}
+    is an isomorphism. Show that if $\mathcal T$ is compactly generated, then any cohomological functor is representable. (Hint: use the resolution constructed in the notes replacing $\operatorname{Hom}(-,X)$ with $H$.)
 
 \end{enumerate}
 

@@ -1,6 +1,6 @@
-# Homework One 
+# Homework Two 
 
-Now we start with actual math. Edit the supplied TeX file to include your solutions and push the result to the 
+Edit the supplied TeX file to include your solutions and push the result to the 
 repo by the due date. 
 
 ## Editing and submitting files
